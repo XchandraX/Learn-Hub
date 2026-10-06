@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Learning Journal | Chx</title>
+    <meta
+      name="description"
+      content="Kumpulan progres belajar coding — Python, Git, C++, dan lainnya."
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/home.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+  </head>
+  <body>
+    <button id="theme-toggle">☀️</button>
+
+    <header class="hero">
+      <h1>📖 Learning Journal</h1>
+      <p>Kumpulan progres belajar coding-ku, langsung dari GitHub.</p>
+      <div class="hero-stats">
+        <div class="stat">
+          <strong id="stat-subjects">0</strong>
+          <span>Subjects</span>
+        </div>
+        <div class="stat">
+          <strong id="stat-repos">0</strong>
+          <span>Repos</span>
+        </div>
+        <div class="stat">
+          <strong id="stat-updated">-</strong>
+          <span>Last Update</span>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <div id="subjects-grid" class="subjects-grid"></div>
+    </main>
+
+    <footer>
+      <p>
+        © 2025 Chx ·
+        <a href="https://github.com/XchandraX" target="_blank" rel="noopener"
+          >GitHub</a
+        >
+      </p>
+    </footer>
+
+    <script type="module" src="js/home.js"></script>
+    <script src="js/theme.js" defer></script>
+  </body>
+</html>

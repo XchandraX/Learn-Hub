@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Explore | Learning Journal</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/explore.css" />
+    <link rel="stylesheet" href="css/markdown.css" />
+    <link rel="stylesheet" href="css/modal.css" />
+    <link rel="stylesheet" href="css/media.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css"
+    />
+  </head>
+  <body class="explore-page">
+    <div id="loading-overlay" class="loading-overlay">
+      <div class="spinner"></div>
+      <p id="loading-text">Memuat repositori...</p>
+    </div>
+
+    <header class="topbar">
+      <a href="index" class="topbar-back">← Back</a>
+      <div class="topbar-title">
+        <span id="topbar-icon">📁</span>
+        <span id="topbar-repo">Loading...</span>
+      </div>
+      <div class="topbar-actions">
+        <button
+          id="mobile-tree-toggle"
+          class="icon-btn"
+          title="Toggle file tree"
+        >
+          ☰
+        </button>
+        <a
+          id="topbar-github"
+          href="#"
+          target="_blank"
+          rel="noopener"
+          class="icon-btn"
+          title="Open in GitHub"
+          >↗</a
+        >
+        <button id="theme-toggle" class="icon-btn">☀️</button>
+      </div>
+    </header>
+
+    <div class="explore-layout">
+      <aside id="file-tree-panel" class="file-tree-panel">
+        <div class="file-tree-header">
+          <span>EXPLORER</span>
+          <div class="file-tree-actions">
+            <button
+              id="collapse-all"
+              class="icon-btn-sm"
+              title="Tutup semua folder"
+            >
+              ⊟
+            </button>
+            <button
+              id="expand-all"
+              class="icon-btn-sm"
+              title="Buka semua folder"
+            >
+              ⊞
+            </button>
+            <button id="refresh-tree" class="icon-btn-sm" title="Refresh">
+              ↻
+            </button>
+          </div>
+        </div>
+        <div id="file-tree" class="file-tree"></div>
+      </aside>
+
+      <main class="viewer-panel">
+        <div id="welcome-panel" class="welcome-panel">
+          <div class="welcome-content">
+            <div class="welcome-icon">👈</div>
+            <h2>Pilih file untuk dibuka</h2>
+            <p>Klik file di sidebar untuk melihat isinya.</p>
+            <p class="welcome-hint">
+              💡 File <code>.md</code> akan di-render, file
+              <code>.py</code> bisa dijalankan langsung di browser!
+            </p>
+          </div>
+        </div>
+
+        <div id="file-viewer" class="file-viewer" style="display: none">
+          <div class="viewer-header">
+            <div id="breadcrumb" class="breadcrumb"></div>
+            <div class="viewer-actions">
+              <button id="view-toggle" class="action-btn" style="display: none">
+                👁 Preview
+              </button>
+              <button
+                id="run-btn"
+                class="action-btn primary"
+                style="display: none"
+              >
+                ▶ Run
+              </button>
+              <button id="copy-btn" class="action-btn">📋 Copy</button>
+              <button id="download-btn" class="action-btn">⬇ Download</button>
+            </div>
+          </div>
+
+          <div id="viewer-body" class="viewer-body"></div>
+
+          <div id="output-panel" class="output-panel" style="display: none">
+            <div class="output-header">
+              <span>OUTPUT</span>
+              <button id="clear-output" class="icon-btn-sm">✕</button>
+            </div>
+            <pre id="output-content" class="output-content"></pre>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script type="module" src="js/explore.js"></script>
+    <script src="js/theme.js" defer></script>
+  </body>
+</html>
