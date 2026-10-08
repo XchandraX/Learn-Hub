@@ -16,9 +16,11 @@ import {
 } from "./markdown.js";
 import { IMAGE_EXTS, AUDIO_EXTS, VIDEO_EXTS, PDF_EXTS } from "./constants.js";
 import { runners } from "./runners/index.js";
+import { renderHtmlPreview, resetHtmlRenderMode, getHtmlRenderMode } from "./html.js";
 
 export const openFile = async (path) => {
   state.currentFile = path;
+  resetHtmlRenderMode();
   state.currentContent = "";
 
   document.querySelectorAll(".tree-item.file").forEach((el) => {
@@ -97,11 +99,17 @@ export const openFile = async (path) => {
     if (ext === "md") {
       renderMarkdown(content, path);
       document.getElementById("view-toggle").style.display = "inline-flex";
+    } else if (ext === "html" || ext === "htm") {
+      renderCode(content, lang || "markup");
+      const toggleBtn = document.getElementById("view-toggle");
+      toggleBtn.textContent = "▶ Preview";
+      toggleBtn.style.display = "inline-flex";
     } else {
       renderCode(content, lang);
     }
 
-    if (RUNNABLE[ext]) {
+    // Tombol Run hanya untuk bahasa "runnable" (bukan HTML — HTML punya Preview)
+    if (RUNNABLE[ext] && ext !== "html" && ext !== "htm") {
       const langName = runners[RUNNABLE[ext]]?.label || "Code";
       const btn = document.getElementById("run-btn");
       btn.style.display = "inline-flex";
@@ -119,5 +127,20 @@ export const toggleMarkdownView = () => {
     renderMarkdownSource(state.currentContent);
   } else {
     renderMarkdown(state.currentContent, state.currentFile);
+  }
+};
+
+export const toggleHtmlView = () => {
+  const toggleBtn = document.getElementById("view-toggle");
+
+  if (getHtmlRenderMode() === "preview") {
+    // Kembali ke source
+    renderCode(state.currentContent, getLang(state.currentFile) || "markup");
+    resetHtmlRenderMode();
+    toggleBtn.textContent = "▶ Preview";
+  } else {
+    // Tampilkan preview
+    renderHtmlPreview(state.currentContent, state.currentFile);
+    toggleBtn.textContent = "👁 Source";
   }
 };

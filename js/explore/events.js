@@ -1,7 +1,7 @@
 import { state } from "./state.js";
 import { getExt } from "./utils.js";
 import { runByExtension } from "./runners/index.js";
-import { toggleMarkdownView } from "./viewer.js";
+import { toggleMarkdownView, toggleHtmlView } from "./viewer.js";
 import { IMAGE_EXTS, AUDIO_EXTS, VIDEO_EXTS, PDF_EXTS } from "./constants.js";
 
 export const bindEvents = () => {
@@ -35,8 +35,14 @@ export const bindEvents = () => {
     URL.revokeObjectURL(url);
   });
 
-  document.getElementById("view-toggle").addEventListener("click", toggleMarkdownView);
-
+  document.getElementById("view-toggle").addEventListener("click", () => {
+    const ext = getExt(state.currentFile);
+    if (ext === "html" || ext === "htm") {
+      toggleHtmlView();
+    } else {
+      toggleMarkdownView();
+    }
+  });
   document.getElementById("run-btn").addEventListener("click", () => {
     const ext = getExt(state.currentFile);
     if (ext === "md") {
